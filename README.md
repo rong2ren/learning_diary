@@ -2,6 +2,7 @@
 
 ## Overview
 This repository tracks my learning journey, focusing on Java, Python, Cloud Computing (AWS), AI tools (ChatGPT API), and other skills. 
+Every day is a learning day and having a clean way of reviewing that learnt in days gone by is useful both for myself and perhaps others.
 
 
 
