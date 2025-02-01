@@ -7,13 +7,81 @@ Every day is a learning day and having a clean way of reviewing that learnt in d
 
 
 
-## Interview
-Coding Interview Question Videos:
+## PNPM
+PNPM is a package manager for JavaScript/TypeScript projects that offers several advantages over NPM and Yarn:
+**1. Disk Space Efficiency**
+Uses a content-addressable store to save disk space
+Instead of copying node_modules for each project, it creates hard links
+Example: if you have 100 projects using React, PNPM stores React only once on your disk
 
-- IDeserve (88 videos)
-- Tushar Roy (5 playlists)
+**2. Strict Dependencies**
+```
+project/
+├── node_modules/
+│   ├── .pnpm/
+│   │   ├── react@18.2.0/
+│   │   └── lodash@4.17.21/
+│   ├── react -> .pnpm/react@18.2.0/
+│   └── lodash -> .pnpm/lodash@4.17.21/
+```
 
-- Super for walkthroughs of problem solutions
-- Nick White - LeetCode Solutions (187 Videos)
+**3. Installation Command Examples**
+```
+# Install a package
+pnpm add react
 
-- FisherCoder - LeetCode Solutions
+# Install dev dependency
+pnpm add -D typescript
+
+# Install workspace package
+pnpm add @your-project/ui --workspace
+```
+
+## Monorepo Structure
+A typical monorepo structure looks like this:
+```
+us-procurement-search/
+├── apps/
+│   ├── web/             # Main web application
+│   └── admin/           # Admin dashboard
+├── packages/
+│   ├── ui/             # Shared UI components
+│   ├── database/       # Database schemas and utilities
+│   ├── api/            # API clients and interfaces
+│   └── config/         # Shared configuration
+├── package.json
+├── pnpm-workspace.yaml
+└── turbo.json
+```
+
+## Turborepo Configuration
+Turborepo is a high-performance build system for JavaScript/TypeScript monorepos.
+Turborepo handles build orchestration and caching. Here's a sample configuration:
+```
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".env"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": []
+    }
+  }
+}
+```
+Intelligent Caching
+```
+# First run - takes full build time
+turbo run build  # ~2 minutes
+
+# Second run - uses cache
+turbo run build  # ~0.1 seconds
+```
