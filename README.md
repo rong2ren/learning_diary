@@ -85,3 +85,16 @@ turbo run build  # ~2 minutes
 # Second run - uses cache
 turbo run build  # ~0.1 seconds
 ```
+
+## pytest
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_scrapers.py
+
+# Run with verbose output
+pytest -v
+
+# Run and show print statements
+pytest -s
