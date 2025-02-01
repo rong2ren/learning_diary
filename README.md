@@ -87,6 +87,7 @@ turbo run build  # ~0.1 seconds
 ```
 
 ## pytest
+```
 # Run all tests
 pytest
 
@@ -98,3 +99,4 @@ pytest -v
 
 # Run and show print statements
 pytest -s
+```
